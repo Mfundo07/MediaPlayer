@@ -9,6 +9,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,7 +43,11 @@ public class SongsFragment extends Fragment {
     private AudioManager sAudioManager;
     private ImageButton pauseButton;
     private ImageButton playButton;
+    private ImageButton fast_forward;
+    private  ImageButton rewind;
     boolean paused = true;
+    private int rewind_sec = 0;
+    private ImageButton stop;
     final ArrayList<Song> songs = new ArrayList<Song>();
 
     private AudioManager.OnAudioFocusChangeListener sOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener(){
@@ -84,9 +89,10 @@ public class SongsFragment extends Fragment {
         songs.add(new Song("Unbreak my Heart", "Toni braxton",R.raw.unbreak_my_heart,R.drawable.ic_play_arrow_black));
         SongAdapter adapter = new SongAdapter(getActivity(),R.color.category_albums,songs);
         final ListView listView = (ListView) rootView.findViewById(R.id.list);
-       sMediaPlayer =  MediaPlayer.create(getActivity(),R.raw.audio);
         pauseButton = (ImageButton) rootView.findViewById(R.id.bt_start_pause);
         playButton = (ImageButton) rootView.findViewById(R.id.bt_start_play);
+        fast_forward = (ImageButton) rootView.findViewById(R.id.fast_forward);
+        rewind = (ImageButton) rootView.findViewById(R.id.rewind);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -146,6 +152,22 @@ public class SongsFragment extends Fragment {
                 sMediaPlayer.start();
             }
         });
+        fast_forward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sMediaPlayer.seekTo(rewind_sec+=3000);
+
+            }
+        });rewind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sMediaPlayer.seekTo(rewind_sec-=3000);
+            }
+        });
+
+
+
+
 
 
 
