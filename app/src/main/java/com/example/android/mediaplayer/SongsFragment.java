@@ -1,24 +1,21 @@
 package com.example.android.mediaplayer;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -89,9 +86,8 @@ public class SongsFragment extends Fragment {
 
 
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.song_list,container,false);
 
         sAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
@@ -108,10 +104,10 @@ public class SongsFragment extends Fragment {
 
         final ArrayList<Song> songs = new ArrayList<Song>();
         songs.add(new Song("Mask Off (Remix)","Future ft Kendrick Lamar",R.raw.audio,android.R.drawable.ic_media_play));
-        songs.add(new Song("Colors of the wind", "Vannessa Williams",R.raw.colors_of_the_wind,android.R.drawable.ic_media_play));
+        songs.add(new Song("Colors of the wind", "Vanessa Williams",R.raw.colors_of_the_wind,android.R.drawable.ic_media_play));
         songs.add(new Song("Don't dream it's over", "Crowded House",R.raw.dont_dream_its_over,android.R.drawable.ic_media_play));
         songs.add(new Song("Let's get retarded ", "The Black Eyed Peas",R.raw.lets_get_retarded,android.R.drawable.ic_media_play));
-        songs.add(new Song("Hit me baby one more time", "Britney Spears",R.raw.hit_me_baby_one_more_time,android.R.drawable.ic_media_play));
+        songs.add(new Song("If", "Kana Nishino",R.raw._if_,android.R.drawable.ic_media_play));
         songs.add(new Song("Niggas in Paris", "Jay-Z & Kanye West",R.raw.niggas_in_paris,android.R.drawable.ic_media_play));
         songs.add(new Song("See you Again", "Miley Cyrus",R.raw.see_you_again,android.R.drawable.ic_media_play));
         songs.add(new Song("Work it", "Missy Elliot",R.raw.missy_workit,android.R.drawable.ic_media_play));
@@ -131,7 +127,7 @@ public class SongsFragment extends Fragment {
                 // play a different sound file
                 releaseMediaPlayer();
 
-                // Get the {@link Word} object at the given position the user clicked on
+                // Get the {@link Song} object at the given position the user clicked on
                 Song song = songs.get(position);
 
                 // Request audio focus so in order to play the audio file. The app needs to play a
@@ -145,12 +141,13 @@ public class SongsFragment extends Fragment {
                     // We have audio focus now.
 
                     // Create and setup the {@link MediaPlayer} for the audio resource associated
-                    // with the current word
+                    // with the current song
                     sMediaPlayer = MediaPlayer.create(getActivity(), song.getAudioResourceId());
 
                     // Start the audio file
 
                     sMediaPlayer.start();
+
                     playView.setVisibility(View.VISIBLE);
                     playButton.setImageResource(android.R.drawable.ic_media_pause);
                     selectedFile.setText(song.getArtistName() + " - "+ song.getSongTitle());
