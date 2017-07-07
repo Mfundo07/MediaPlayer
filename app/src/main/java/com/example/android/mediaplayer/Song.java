@@ -11,18 +11,16 @@ public class Song {
     private static final int NO_IMAGE_PROVIDED = -1;
     private int mAudioResourceId;
     private int mPlayArrowResourceId;
-    private int mPauseButtonResourceId;
 
     public Song() {
     }
 
-    public Song(String songTitle, String artistName, int imageResourceId, int audioResourceId, int playArrowResourceId, int pauseButtonResourceId) {
+    public Song(String songTitle, String artistName, int imageResourceId, int audioResourceId, int playArrowResourceId) {
         this.mSongTitle = songTitle;
         this.mArtistName = artistName;
         this.mImageResourceId = imageResourceId;
         this.mAudioResourceId = audioResourceId;
         this.mPlayArrowResourceId = playArrowResourceId;
-        this.mPauseButtonResourceId = pauseButtonResourceId;
 
 
     }
